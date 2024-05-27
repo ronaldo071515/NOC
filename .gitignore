@@ -3,3 +3,6 @@ dist/
 
 # Logs
 logs/
+
+# Environments
+.env
