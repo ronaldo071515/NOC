@@ -11,3 +11,6 @@ MAILER_EMAIL=correovalido@gmail.com
 MAILER_SECRET_KEY=12345
 PROD=true
 ```
+
+3. Ejecutar el comando ```npm install```.
+4. Ejecutar ```npm run dev```

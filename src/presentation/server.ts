@@ -13,20 +13,22 @@ export class Server {
     public static start() {
         console.log('Server started...');
 
-        CronService.createJob(
-            '*/5 * * * * *',
-            () => {
-                const url = 'http://localhost:3000'
-                new CheckService(
-                    fileSytemLogRepository,
-                    // undefined,
-                    // undefined,
-                    () => console.log(`${url} is Ok`),
-                    (error) => console.log(error)
-                ).execute( url );
-                // new CheckService().execute('http://localhost:3000');
-            }
-        );
+        // TODO: enviar emails
+
+        // CronService.createJob(
+        //     '*/5 * * * * *',
+        //     () => {
+        //         const url = 'http://google.com'
+        //         new CheckService(
+        //             fileSytemLogRepository,
+        //             // undefined,
+        //             // undefined,
+        //             () => console.log(`${url} is Ok`),
+        //             (error) => console.log(error)
+        //         ).execute( url );
+        //         // new CheckService().execute('http://localhost:3000');
+        //     }
+        // );
     }
 
 }
