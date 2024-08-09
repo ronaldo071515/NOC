@@ -6,21 +6,25 @@ import { envs } from "../config/plugins/env.plugin";
 import { EmailService } from "./email/email.service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 import { LogRepository } from '../domain/repository/log.repository';
+import { MongoLogDatasource } from "../infrasctructure/datasources/mongo-log.datasource";
+import { LogSeverityLevel } from "../domain/entities/log.entiy";
+import { PostgresLogDatasource } from "../infrasctructure/datasources/postgres-log.datasource";
 
 //instancia de las implementaciones repository
-const fileSytemLogRepository = new LogRepositoryImpl(
-    new FileSystemDatasource()
+const logRepository = new LogRepositoryImpl(
+    // new FileSystemDatasource()
+    // new MongoLogDatasource()
+    new PostgresLogDatasource(),
 )
 
 const emailService = new EmailService();
 
 export class Server {
     
-    public static start() {
+    public static async start() {
         console.log('Server started...');
 
         // console.log(envs.MAILER_SECRET_KEY, envs.MAILER_EMAIL);
-        console.log('Server Started...');
         //TODO: enviar emails
         // new SendEmailLogs(emailService, fileSytemLogRepository).execute(['rtorres66@misena.edu.co'])
         // emailService.sendEmailWithFileSystemLogs(['rtorres66@misena.edu.co']);
@@ -34,20 +38,27 @@ export class Server {
         //     `
         // });
 
-        // CronService.createJob(
-        //     '*/5 * * * * *',
-        //     () => {
-        //         const url = 'http://google.com'
-        //         new CheckService(
-        //             fileSytemLogRepository,
-        //             // undefined,
-        //             // undefined,
-        //             () => console.log(`${url} is Ok`),
-        //             (error) => console.log(error)
-        //         ).execute( url );
-        //         // new CheckService().execute('http://localhost:3000');
-        //     }
-        // );
+        // const logs = await logRepository.getLogs(LogSeverityLevel.low);
+        // console.log(logs);
+
+        // const logs = await logRepository.getLogs(LogSeverityLevel.high);
+        // console.log(logs);
+
+
+        CronService.createJob(
+            '*/5 * * * * *',
+            () => {
+                const url = 'http://googleasdddddddddwwef.com'
+                new CheckService(
+                    logRepository,
+                    // undefined,
+                    // undefined,
+                    () => console.log(`${url} is Ok`),
+                    (error) => console.log(error)
+                ).execute( url );
+                // new CheckService().execute('http://localhost:3000');
+            }
+        );
     }
 
 }

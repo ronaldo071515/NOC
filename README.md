@@ -5,13 +5,25 @@ El objetivo es crear una serie de tareas usando arquitectura limpia con Typescri
 # dev
 1. Clonar el archivo .env.template a .env
 2. Configurar las variables de entorno
-```
-PORT=3000
-MAILER_SERVICE=gmail
-MAILER_EMAIL=correovalido@gmail.com
-MAILER_SECRET_KEY=12345
-PROD=true
-```
-
 3. Ejecutar el comando ```npm install```.
-4. Ejecutar ```npm run dev```
+4. Levantar las bases de datos con el comando
+    ```
+    docker compose up -d
+    ```
+5. Ejecutar ```npm run dev```
+
+
+
+# Notas
+Crear una colección = tabla y documento = registro
+```
+const newLog = await LogModel.create({
+    message: 'Test Message, desde mongo',
+    origin: 'app.ts',
+    level: 'low'
+});
+await newLog.save();
+console.log(newLog);
+```
+``const logs = await LogModel.find();``
+``console.log(logs[1].message);``

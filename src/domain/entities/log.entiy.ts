@@ -30,6 +30,9 @@ export class LogEntity {
 
     // método de la entidad que me permite crear instancias del json
     static fromJson = (json: string): LogEntity => {
+        
+        json = (json === ' ') ? '{}' : json;
+
         const { message, level, createdAt, origin } = JSON.parse( json );
         
         const log = new LogEntity({
@@ -37,6 +40,17 @@ export class LogEntity {
             level,
             origin,
             createdAt
+        });
+        return log;
+    }
+
+    static fromObject = (object: { [key: string]: any }):LogEntity => {
+        const { message,level,createdAt,origin } = object;
+        const log = new LogEntity({
+            message,
+            level,
+            createdAt,
+            origin
         });
         return log;
     }
