@@ -9,13 +9,24 @@ import { LogRepository } from '../domain/repository/log.repository';
 import { MongoLogDatasource } from "../infrasctructure/datasources/mongo-log.datasource";
 import { LogSeverityLevel } from "../domain/entities/log.entiy";
 import { PostgresLogDatasource } from "../infrasctructure/datasources/postgres-log.datasource";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 
 //instancia de las implementaciones repository
-const logRepository = new LogRepositoryImpl(
+const fsLogRepository = new LogRepositoryImpl(
+    new FileSystemDatasource()
+    // new MongoLogDatasource()
+    // new PostgresLogDatasource(),
+);
+const mongoLogRepository = new LogRepositoryImpl(
+    // new FileSystemDatasource()
+    new MongoLogDatasource()
+    // new PostgresLogDatasource(),
+);
+const pgLogRepository = new LogRepositoryImpl(
     // new FileSystemDatasource()
     // new MongoLogDatasource()
     new PostgresLogDatasource(),
-)
+);
 
 const emailService = new EmailService();
 
@@ -48,9 +59,9 @@ export class Server {
         CronService.createJob(
             '*/5 * * * * *',
             () => {
-                const url = 'http://googleasdddddddddwwef.com'
-                new CheckService(
-                    logRepository,
+                const url = 'http://google.com'
+                new CheckServiceMultiple(
+                    [fsLogRepository, mongoLogRepository, pgLogRepository],
                     // undefined,
                     // undefined,
                     () => console.log(`${url} is Ok`),
