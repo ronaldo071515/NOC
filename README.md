@@ -10,7 +10,11 @@ El objetivo es crear una serie de tareas usando arquitectura limpia con Typescri
     ```
     docker compose up -d
     ```
-5. Ejecutar ```npm run dev```
+5. Eecutar el comando
+    ```
+    npx prisma dev
+    ```
+6. Ejecutar ```npm run dev```
 
 
 

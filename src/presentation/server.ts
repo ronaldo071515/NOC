@@ -56,20 +56,20 @@ export class Server {
         // console.log(logs);
 
 
-        CronService.createJob(
-            '*/5 * * * * *',
-            () => {
-                const url = 'http://google.com'
-                new CheckServiceMultiple(
-                    [fsLogRepository, mongoLogRepository, pgLogRepository],
-                    // undefined,
-                    // undefined,
-                    () => console.log(`${url} is Ok`),
-                    (error) => console.log(error)
-                ).execute( url );
-                // new CheckService().execute('http://localhost:3000');
-            }
-        );
+        // CronService.createJob(
+        //     '*/5 * * * * *',
+        //     () => {
+        //         const url = 'http://google.com'
+        //         new CheckServiceMultiple(
+        //             [fsLogRepository, mongoLogRepository, pgLogRepository],
+        //             // undefined,
+        //             // undefined,
+        //             () => console.log(`${url} is Ok`),
+        //             (error) => console.log(error)
+        //         ).execute( url );
+        //         // new CheckService().execute('http://localhost:3000');
+        //     }
+        // );
     }
 
 }
