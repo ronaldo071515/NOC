@@ -7,7 +7,7 @@ import { EmailService } from "./email/email.service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 import { LogRepository } from '../domain/repository/log.repository';
 import { MongoLogDatasource } from "../infrasctructure/datasources/mongo-log.datasource";
-import { LogSeverityLevel } from "../domain/entities/log.entiy";
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 import { PostgresLogDatasource } from "../infrasctructure/datasources/postgres-log.datasource";
 import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 

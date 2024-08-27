@@ -1,5 +1,5 @@
 // repository = como vamos a llamar nuestro datasource
-import { LogEntity, LogSeverityLevel } from "../entities/log.entiy";
+import { LogEntity, LogSeverityLevel } from "../entities/log.entity";
 
 
 export abstract class LogRepository { // se crea abstracta para que no se pueda crear instancias de la clase
